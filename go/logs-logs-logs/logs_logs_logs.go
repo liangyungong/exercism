@@ -8,7 +8,6 @@ import (
 // Application identifies the application emitting the given log.
 func Application(log string) string {
 	for _, c := range log {
-		fmt.Sprintf("%c\n", c)
 		switch c {
 		case '❗':
 			return "recommendation"
