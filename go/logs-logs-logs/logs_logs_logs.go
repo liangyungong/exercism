@@ -1,7 +1,6 @@
 package logs
 
 import (
-	"fmt"
 	"unicode/utf8"
 )
 
@@ -23,7 +22,7 @@ func Application(log string) string {
 // Replace replaces all occurrences of old with new, returning the modified log
 // to the caller.
 func Replace(log string, oldRune, newRune rune) string {
-	out := []rune (log)
+	out := []rune(log)
 	for i, c := range out {
 		if c == oldRune {
 			out[i] = newRune
