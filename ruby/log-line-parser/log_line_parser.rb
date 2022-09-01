@@ -28,8 +28,7 @@ class LogLineParser
     LEVELS.each do |level|
       if l.include? "[#{level}]: "
         l.slice! "[#{level}]: "
-        l.strip
-        return "#{l} (#{level.downcase})"
+        return "#{l.strip} (#{level.downcase})"
       end
     end
   end
