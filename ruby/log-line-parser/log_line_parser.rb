@@ -1,35 +1,14 @@
 class LogLineParser
-
-  LEVELS = %w{INFO WARNING ERROR}
+  attr_reader :log_level, :message
 
   def initialize(line)
-    @line = line.strip
-  end
+    m = /\[(?<log_level>[A-Z]+)\]:\s*(?<message>[\w| ]+\b)/.match(line)
 
-  def message
-    l = @line.clone
-    LEVELS.each do |level|
-      l.slice! "[#{level}]: "
-    end
-    l.strip
-  end
-
-  def log_level
-    l = @line.clone
-    LEVELS.each do |level|
-      if l.include? "[#{level}]: "
-        return level.downcase
-      end
-    end
+    @log_level = m[:log_level].downcase
+    @message = m[:message]
   end
 
   def reformat
-    l = @line.clone
-    LEVELS.each do |level|
-      if l.include? "[#{level}]: "
-        l.slice! "[#{level}]: "
-        return "#{l.strip} (#{level.downcase})"
-      end
-    end
+    "#{@message} (#{@log_level})"
   end
 end
