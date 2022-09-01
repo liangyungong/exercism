@@ -1,17 +1,36 @@
 class LogLineParser
+
+  LEVELS = %w{INFO WARNING ERROR}
+
   def initialize(line)
-    @line = line
+    @line = line.strip
   end
 
   def message
-    raise 'Please implement the LogLineParser#message method'
+    l = @line.clone
+    LEVELS.each do |level|
+      l.slice! "[#{level}]: "
+    end
+    l.strip
   end
 
   def log_level
-    raise 'Please implement the LogLineParser#log_level method'
+    l = @line.clone
+    LEVELS.each do |level|
+      if l.include? "[#{level}]: "
+        return level.downcase
+      end
+    end
   end
 
   def reformat
-    raise 'Please implement the LogLineParser#reformat method'
+    l = @line.clone
+    LEVELS.each do |level|
+      if l.include? "[#{level}]: "
+        l.slice! "[#{level}]: "
+        l.strip
+        return "#{l} (#{level.downcase})"
+      end
+    end
   end
 end
