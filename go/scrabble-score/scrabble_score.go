@@ -20,6 +20,7 @@ func lookUpScore(letter string) int {
 	}
 	return 0
 }
+
 func Score(word string) int {
 	total := 0
 	for _, letter := range word {
