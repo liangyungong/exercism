@@ -7,15 +7,20 @@
   (last birds))
 
 (defn inc-bird [birds]
-  let [today_count (today birds)
-       before_today (drop-last birds)]
-  (conj before_today (+ today_count 1)))
+  (let [today_count (today birds)
+        before_today (drop-last birds)]
+    (conj (into [] before_today) (+ today_count 1))))
 
 (defn day-without-birds? [birds]
-  (any (map (fn [c] (= c 0) birds))))
+  (if (some #(= % 0) birds)
+    true
+    false))
 
-(defn n-days-count [birds n])
+(defn n-days-count [birds n]
+  (reduce + (take n birds)))
 
-(defn busy-days [birds])
+(defn busy-days [birds]
+  (count (filter #(>= % 5) birds)))
 
-(defn odd-week? [birds])
+(defn odd-week? [birds]
+  (= (vector 1 0 1 0 1 0 1) birds))
