@@ -13,10 +13,9 @@
    taking into account its success rate"
   [speed]
   (let [hourly_rate 221]
-    (Double/parseDouble (format "%.2f"
-                                (* (success-rate speed)
-                                   hourly_rate
-                                   speed)))))
+    (* speed
+       hourly_rate
+       (success-rate speed))))
 
 (defn working-items
   "Calculates how many working cars are produced per minute"
